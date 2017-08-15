@@ -61,10 +61,19 @@ type Actions interface {
 	// registered functions. A stopped shell is only inactive but totally functional.
 	// Its functions can still be called and can be restarted.
 	Stop()
+
+
+	ReadLineWithDefault(what string) string
 }
 
 type shellActionsImpl struct {
 	*Shell
+}
+
+func (s *shellActionsImpl) ReadLineWithDefault(what string) string {
+    // use the new ReadlineWithDefault feature of readline	
+	line, _ := s.reader.scanner.ReadlineWithDefault(what)
+	return line
 }
 
 // ReadLine reads a line from standard input.
